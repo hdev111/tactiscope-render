@@ -1,0 +1,29 @@
+[package]
+name = "tactiscope-render"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Native GPU video renderer with a versioned JSON render plan"
+readme = "../../README.md"
+
+[lib]
+name = "tactiscope_render"
+path = "src/lib.rs"
+
+[dependencies]
+anyhow = "1"
+compositor = { package = "tactiscope-compositor", path = "../compositor" }
+fontdue = "0.9"
+gpu = { package = "tactiscope-gpu", path = "../gpu" }
+png = "0.18"
+pollster = "0.4"
+resvg = "0.45"
+schemars = { version = "1", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tiny-skia = "0.11"
+ureq = "2"
+
+[dev-dependencies]
+tempfile = "3"

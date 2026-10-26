@@ -1,0 +1,30 @@
+# NOTICE
+
+## Renderer
+
+The `tactiscope-render` source code is licensed under the MIT License. It was
+extracted from the TactiScope project, which started from the OpenCut codebase.
+The MIT copyright notice retains both attributions.
+
+## FFmpeg in release archives
+
+Release archives produced by this repository bundle a pinned static FFmpeg build
+for convenience. The FFmpeg binaries are **not** part of the MIT-licensed Rust
+code and are distributed under **GPL-3.0-or-later**.
+
+- FFmpeg version: 6.1.1
+- Binary provider: eugeneware/ffmpeg-static, release `b6.1.1`
+- Provider release: https://github.com/eugeneware/ffmpeg-static/releases/tag/b6.1.1
+- FFmpeg source: https://ffmpeg.org/releases/ffmpeg-6.1.1.tar.xz
+- FFmpeg licensing: https://ffmpeg.org/legal.html
+
+Each release archive includes the upstream FFmpeg license text as
+`FFMPEG_LICENSE`. If you redistribute an archive, you are responsible for
+complying with the GPL for the FFmpeg binaries, including source availability
+and notices for the exact build.
+
+If you do not want to redistribute GPL binaries, use an external FFmpeg build
+and do not ship the bundled `ffmpeg`/`ffprobe` files. The renderer itself remains
+MIT-licensed.
+
+This notice is engineering information, not legal advice.

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "project": {
+    "width": 640,
+    "height": 360,
+    "fps": { "numerator": 30, "denominator": 1 },
+    "background": {
+      "type": "gradient",
+      "css": "linear-gradient(135deg, #0f172a, #1d4ed8 55%, #38bdf8)"
+    }
+  },
+  "durationTicks": 120000,
+  "media": [],
+  "tracks": [],
+  "audio": { "elements": [] },
+  "quality": "high"
+}

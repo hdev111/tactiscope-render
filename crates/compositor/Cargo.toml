@@ -1,0 +1,18 @@
+[package]
+name = "tactiscope-compositor"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "GPU compositor used by the TactiScope renderer"
+
+[lib]
+name = "compositor"
+
+[dependencies]
+bytemuck = { version = "1.25.0", features = ["derive"] }
+effects = { package = "tactiscope-effects", path = "../effects" }
+gpu = { package = "tactiscope-gpu", path = "../gpu" }
+masks = { package = "tactiscope-masks", path = "../masks" }
+serde = { version = "1.0.228", features = ["derive"] }
+thiserror = "2.0.18"

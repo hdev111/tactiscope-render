@@ -1,0 +1,898 @@
+{
+  "$defs": {
+    "AudioElementPlan": {
+      "properties": {
+        "animations": {
+          "default": null
+        },
+        "durationTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "muted": {
+          "default": false,
+          "type": "boolean"
+        },
+        "retime": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RetimePlan"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "sourcePath": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceUrl": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "startTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "trimStartTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "volumeDb": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "required": [
+        "startTicks",
+        "durationTicks",
+        "trimStartTicks"
+      ],
+      "type": "object"
+    },
+    "AudioPlan": {
+      "properties": {
+        "elements": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/AudioElementPlan"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "BackgroundPlan": {
+      "oneOf": [
+        {
+          "properties": {
+            "color": {
+              "type": "string"
+            },
+            "type": {
+              "const": "color",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "color"
+          ],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "css": {
+              "type": "string"
+            },
+            "type": {
+              "const": "gradient",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "css"
+          ],
+          "type": "object"
+        },
+        {
+          "properties": {
+            "blurIntensity": {
+              "format": "float",
+              "type": "number"
+            },
+            "type": {
+              "const": "blur",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "blurIntensity"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "EffectPlan": {
+      "properties": {
+        "id": {
+          "default": "",
+          "type": "string"
+        },
+        "intensity": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object"
+    },
+    "ElementPlan": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/VideoElementPlan",
+          "properties": {
+            "type": {
+              "const": "video",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/$defs/ImageElementPlan",
+          "properties": {
+            "type": {
+              "const": "image",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/$defs/TextElementPlan",
+          "properties": {
+            "type": {
+              "const": "text",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/$defs/GraphicElementPlan",
+          "properties": {
+            "type": {
+              "const": "graphic",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/$defs/StickerElementPlan",
+          "properties": {
+            "type": {
+              "const": "sticker",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/$defs/SceneEffectElementPlan",
+          "properties": {
+            "type": {
+              "const": "scene-effect",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "FpsPlan": {
+      "properties": {
+        "denominator": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "numerator": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "numerator",
+        "denominator"
+      ],
+      "type": "object"
+    },
+    "GraphicElementPlan": {
+      "properties": {
+        "animations": {
+          "default": null
+        },
+        "blendMode": {
+          "type": "string"
+        },
+        "definitionId": {
+          "type": "string"
+        },
+        "durationTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "effects": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EffectPlan"
+          },
+          "type": "array"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "masks": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MaskPlan"
+          },
+          "type": "array"
+        },
+        "opacity": {
+          "format": "float",
+          "type": "number"
+        },
+        "params": true,
+        "startTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "transform": {
+          "$ref": "#/$defs/TransformPlan"
+        }
+      },
+      "required": [
+        "id",
+        "definitionId",
+        "params",
+        "startTicks",
+        "durationTicks",
+        "transform",
+        "opacity",
+        "blendMode"
+      ],
+      "type": "object"
+    },
+    "ImageElementPlan": {
+      "properties": {
+        "animations": {
+          "default": null
+        },
+        "blendMode": {
+          "type": "string"
+        },
+        "durationTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "effects": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EffectPlan"
+          },
+          "type": "array"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "masks": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MaskPlan"
+          },
+          "type": "array"
+        },
+        "mediaId": {
+          "type": "string"
+        },
+        "opacity": {
+          "format": "float",
+          "type": "number"
+        },
+        "startTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "transform": {
+          "$ref": "#/$defs/TransformPlan"
+        }
+      },
+      "required": [
+        "id",
+        "mediaId",
+        "startTicks",
+        "durationTicks",
+        "transform",
+        "opacity",
+        "blendMode"
+      ],
+      "type": "object"
+    },
+    "MaskPlan": {
+      "properties": {
+        "feather": {
+          "format": "float",
+          "type": "number"
+        },
+        "inverted": {
+          "type": "boolean"
+        },
+        "params": true,
+        "strokeAlign": {
+          "type": "string"
+        },
+        "strokeColor": {
+          "type": "string"
+        },
+        "strokeWidth": {
+          "format": "float",
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "feather",
+        "inverted",
+        "strokeColor",
+        "strokeWidth",
+        "strokeAlign",
+        "params"
+      ],
+      "type": "object"
+    },
+    "MediaRef": {
+      "properties": {
+        "height": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "sourcePath": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "width": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "sourcePath"
+      ],
+      "type": "object"
+    },
+    "ProjectPlan": {
+      "properties": {
+        "background": {
+          "$ref": "#/$defs/BackgroundPlan"
+        },
+        "fps": {
+          "$ref": "#/$defs/FpsPlan"
+        },
+        "height": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "width": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "fps",
+        "background"
+      ],
+      "type": "object"
+    },
+    "RetimePlan": {
+      "properties": {
+        "maintainPitch": {
+          "default": false,
+          "type": "boolean"
+        },
+        "rate": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "required": [
+        "rate"
+      ],
+      "type": "object"
+    },
+    "SceneEffectElementPlan": {
+      "properties": {
+        "animations": {
+          "default": null
+        },
+        "durationTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "effectType": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "params": true,
+        "startTicks": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "effectType",
+        "params",
+        "startTicks",
+        "durationTicks"
+      ],
+      "type": "object"
+    },
+    "StickerElementPlan": {
+      "properties": {
+        "animations": {
+          "default": null
+        },
+        "assetPath": {
+          "type": "string"
+        },
+        "blendMode": {
+          "type": "string"
+        },
+        "durationTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "effects": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EffectPlan"
+          },
+          "type": "array"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "intrinsicHeight": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "intrinsicWidth": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "opacity": {
+          "format": "float",
+          "type": "number"
+        },
+        "startTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "transform": {
+          "$ref": "#/$defs/TransformPlan"
+        }
+      },
+      "required": [
+        "id",
+        "assetPath",
+        "startTicks",
+        "durationTicks",
+        "transform",
+        "opacity",
+        "blendMode"
+      ],
+      "type": "object"
+    },
+    "TextElementPlan": {
+      "properties": {
+        "animations": {
+          "default": null
+        },
+        "blendMode": {
+          "type": "string"
+        },
+        "durationTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "effects": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EffectPlan"
+          },
+          "type": "array"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "opacity": {
+          "format": "float",
+          "type": "number"
+        },
+        "params": {
+          "$ref": "#/$defs/TextParams"
+        },
+        "startTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "transform": {
+          "$ref": "#/$defs/TransformPlan"
+        }
+      },
+      "required": [
+        "id",
+        "startTicks",
+        "durationTicks",
+        "transform",
+        "opacity",
+        "blendMode",
+        "params"
+      ],
+      "type": "object"
+    },
+    "TextParams": {
+      "properties": {
+        "backgroundColor": {
+          "default": "#ffffff",
+          "type": "string"
+        },
+        "backgroundCornerRadius": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "backgroundEnabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "backgroundOffsetX": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "backgroundOffsetY": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "backgroundPaddingX": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "backgroundPaddingY": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "color": {
+          "default": "#ffffff",
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "fontFamily": {
+          "type": "string"
+        },
+        "fontPath": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fontSize": {
+          "format": "float",
+          "type": "number"
+        },
+        "fontStyle": {
+          "type": "string"
+        },
+        "fontWeight": {
+          "type": "string"
+        },
+        "letterSpacing": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "lineHeight": {
+          "default": 0.0,
+          "format": "float",
+          "type": "number"
+        },
+        "textAlign": {
+          "type": "string"
+        },
+        "textDecoration": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "required": [
+        "content",
+        "fontSize",
+        "fontFamily",
+        "fontWeight",
+        "fontStyle",
+        "textAlign"
+      ],
+      "type": "object"
+    },
+    "TrackPlan": {
+      "properties": {
+        "elements": {
+          "items": {
+            "$ref": "#/$defs/ElementPlan"
+          },
+          "type": "array"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "order": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "order",
+        "elements"
+      ],
+      "type": "object"
+    },
+    "TransformPlan": {
+      "properties": {
+        "positionX": {
+          "format": "float",
+          "type": "number"
+        },
+        "positionY": {
+          "format": "float",
+          "type": "number"
+        },
+        "rotate": {
+          "format": "float",
+          "type": "number"
+        },
+        "scaleX": {
+          "format": "float",
+          "type": "number"
+        },
+        "scaleY": {
+          "format": "float",
+          "type": "number"
+        }
+      },
+      "required": [
+        "positionX",
+        "positionY",
+        "scaleX",
+        "scaleY",
+        "rotate"
+      ],
+      "type": "object"
+    },
+    "VideoElementPlan": {
+      "properties": {
+        "animations": {
+          "default": null
+        },
+        "blendMode": {
+          "type": "string"
+        },
+        "durationTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "effects": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EffectPlan"
+          },
+          "type": "array"
+        },
+        "hidden": {
+          "default": false,
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "masks": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MaskPlan"
+          },
+          "type": "array"
+        },
+        "mediaId": {
+          "type": "string"
+        },
+        "opacity": {
+          "format": "float",
+          "type": "number"
+        },
+        "retime": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RetimePlan"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "startTicks": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "transform": {
+          "$ref": "#/$defs/TransformPlan"
+        },
+        "trimStartTicks": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "mediaId",
+        "startTicks",
+        "durationTicks",
+        "trimStartTicks",
+        "transform",
+        "opacity",
+        "blendMode"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "audio": {
+      "$ref": "#/$defs/AudioPlan",
+      "default": {
+        "elements": []
+      }
+    },
+    "durationTicks": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "media": {
+      "items": {
+        "$ref": "#/$defs/MediaRef"
+      },
+      "type": "array"
+    },
+    "project": {
+      "$ref": "#/$defs/ProjectPlan"
+    },
+    "quality": {
+      "default": "high",
+      "type": "string"
+    },
+    "tracks": {
+      "items": {
+        "$ref": "#/$defs/TrackPlan"
+      },
+      "type": "array"
+    },
+    "version": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "project",
+    "durationTicks",
+    "media",
+    "tracks"
+  ],
+  "title": "RenderPlan",
+  "type": "object"
+}

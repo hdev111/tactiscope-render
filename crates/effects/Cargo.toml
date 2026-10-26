@@ -1,0 +1,18 @@
+[package]
+name = "tactiscope-effects"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "GPU effect passes used by the TactiScope renderer"
+
+[lib]
+name = "effects"
+path = "src/effects.rs"
+crate-type = ["rlib"]
+
+[dependencies]
+bytemuck = { version = "1.25.0", features = ["derive"] }
+gpu = { package = "tactiscope-gpu", path = "../gpu" }
+thiserror = "2.0.18"
+wgpu = "29.0.1"

@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "project": {
+    "width": 640,
+    "height": 360,
+    "fps": { "numerator": 30, "denominator": 1 },
+    "background": { "type": "color", "color": "#000000" }
+  },
+  "durationTicks": 240000,
+  "media": [
+    {
+      "id": "video",
+      "type": "video",
+      "sourcePath": "fixtures/sample.mp4",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "id": "still",
+      "type": "image",
+      "sourcePath": "fixtures/sample.png",
+      "width": 640,
+      "height": 360
+    }
+  ],
+  "tracks": [
+    {
+      "order": 1,
+      "elements": [
+        {
+          "type": "video",
+          "id": "video-1",
+          "mediaId": "video",
+          "startTicks": 0,
+          "durationTicks": 240000,
+          "trimStartTicks": 0,
+          "transform": { "positionX": 0, "positionY": 0, "scaleX": 1, "scaleY": 1, "rotate": 0 },
+          "opacity": 1,
+          "blendMode": "normal"
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "elements": [
+        {
+          "type": "image",
+          "id": "still-1",
+          "mediaId": "still",
+          "startTicks": 60000,
+          "durationTicks": 120000,
+          "transform": { "positionX": 180, "positionY": 90, "scaleX": 0.35, "scaleY": 0.35, "rotate": 0 },
+          "opacity": 0.9,
+          "blendMode": "screen"
+        }
+      ]
+    }
+  ],
+  "audio": {
+    "elements": [
+      {
+        "sourcePath": "fixtures/tone.wav",
+        "startTicks": 0,
+        "durationTicks": 240000,
+        "trimStartTicks": 0,
+        "volumeDb": -6,
+        "muted": false
+      }
+    ]
+  },
+  "quality": "high"
+}

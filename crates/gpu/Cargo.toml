@@ -1,0 +1,23 @@
+[package]
+name = "tactiscope-gpu"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "wgpu context and texture helpers for the TactiScope renderer"
+
+[lib]
+name = "gpu"
+
+[dependencies]
+bytemuck = { version = "1.25.0", features = ["derive"] }
+thiserror = "2.0.18"
+wgpu = "29.0.1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2.116"
+web-sys = { version = "0.3.93", features = ["Document", "Window", "HtmlCanvasElement", "CanvasRenderingContext2d", "OffscreenCanvasRenderingContext2d", "ImageData"] }
+
+[features]
+default = []
+wasm = ["wgpu/webgl"]

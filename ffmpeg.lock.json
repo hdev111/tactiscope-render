@@ -1,0 +1,115 @@
+{
+	"schemaVersion": 1,
+	"release": "b6.1.1",
+	"version": "6.1.1",
+	"provider": "eugeneware/ffmpeg-static",
+	"baseUrl": "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1",
+	"license": "GPL-3.0-or-later",
+	"targets": {
+		"linux-x64": {
+			"ffmpeg": {
+				"asset": "ffmpeg-linux-x64.gz",
+				"sha256": "bfe8a8fc511530457b528c48d77b5737527b504a3797a9bc4866aeca69c2dffa",
+				"size": 29354986,
+				"binarySha256": "e7e7fb30477f717e6f55f9180a70386c62677ef8a4d4d1a5d948f4098aa3eb99",
+				"binarySize": 79826272
+			},
+			"ffprobe": {
+				"asset": "ffprobe-linux-x64.gz",
+				"sha256": "25d9b6ccb05e3d9de9e04e31e2506d8dd7f9f0418981965ac6df12e8d3afd067",
+				"size": 29276839,
+				"binarySha256": "4f231a1960d83e403d08f7971e271707bec278a9ae18e21b8b5b03186668450d",
+				"binarySize": 79665792
+			},
+			"license": {
+				"asset": "linux-x64.LICENSE",
+				"sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+				"size": 35147
+			}
+		},
+		"linux-arm64": {
+			"ffmpeg": {
+				"asset": "ffmpeg-linux-arm64.gz",
+				"sha256": "754a678672298bc68156adff58aa7385a592c2b30b1d0ae8750c45c915c4bac0",
+				"size": 25568691,
+				"binarySha256": "6bb182d0d75d23028db82e9e4f723ca69b853d055698486e6984ddb2c06fb8ce",
+				"binarySize": 51134160
+			},
+			"ffprobe": {
+				"asset": "ffprobe-linux-arm64.gz",
+				"sha256": "2ab6aba60ee84412dff9188720703376cb4e7aaf7e0b5e43aa8249f2acae5bf8",
+				"size": 25493573,
+				"binarySha256": "d17ae9b4c297d48e2521ba14e417bb0537c6ff77c584cdbcd6bb0d8d0307a2e8",
+				"binarySize": 50994160
+			},
+			"license": {
+				"asset": "linux-arm64.LICENSE",
+				"sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+				"size": 35147
+			}
+		},
+		"darwin-x64": {
+			"ffmpeg": {
+				"asset": "ffmpeg-darwin-x64.gz",
+				"sha256": "929b375c1182d956c51f7ac25e0b2b0411fb01f6f407aa15c9758efeb4242106",
+				"size": 25296431,
+				"binarySha256": "ebdddc936f61e14049a2d4b549a412b8a40deeff6540e58a9f2a2da9e6b18894",
+				"binarySize": 78862176
+			},
+			"ffprobe": {
+				"asset": "ffprobe-darwin-x64.gz",
+				"sha256": "d4da574d6e2e197bd259b47d69cf262df9e312af24ad960444f6d806d3d4c186",
+				"size": 25239438,
+				"binarySha256": "fa3add0ce901f7241abe0dfc0155d958fc834aca3f8ce61f87cc712ae669c1e0",
+				"binarySize": 78780408
+			},
+			"license": {
+				"asset": "darwin-x64.LICENSE",
+				"sha256": "2e1d16c72fd74e12063776371da757322f8b77589386532f4fd8634bde7de1af",
+				"size": 4346
+			}
+		},
+		"darwin-arm64": {
+			"ffmpeg": {
+				"asset": "ffmpeg-darwin-arm64.gz",
+				"sha256": "8923876afa8db5585022d7860ec7e589af192f441c56793971276d450ed3bbfa",
+				"size": 19246198,
+				"binarySha256": "a90e3db6a3fd35f6074b013f948b1aa45b31c6375489d39e572bea3f18336584",
+				"binarySize": 45568216
+			},
+			"ffprobe": {
+				"asset": "ffprobe-darwin-arm64.gz",
+				"sha256": "d986a8ec7b030899fe66a8a288ed809a3543338705a3ce178cfb85869c5d80be",
+				"size": 19207077,
+				"binarySha256": "bb2db6f5d8cef919da12fbf592119a987202a8c060a886f3cab091f9cab90b64",
+				"binarySize": 45528808
+			},
+			"license": {
+				"asset": "darwin-arm64.LICENSE",
+				"sha256": "cb48bf09a11f5fb576cddb0431c8f5ed0a60157a9ec942adffc13907cbe083f2",
+				"size": 4376
+			}
+		},
+		"win32-x64": {
+			"ffmpeg": {
+				"asset": "ffmpeg-win32-x64.gz",
+				"sha256": "8883a3dffbd0a16cf4ef95206ea05283f78908dbfb118f73c83f4951dcc06d77",
+				"size": 29581307,
+				"binarySha256": "04e1307997530f9cf2fe35cba2ca7e8875ca91da02f89d6c7243df819c94ad00",
+				"binarySize": 82797568
+			},
+			"ffprobe": {
+				"asset": "ffprobe-win32-x64.gz",
+				"sha256": "f309e6223ad89d2fe54bccd420a7709b66fd27540674e92309578ed491a43c8d",
+				"size": 29521644,
+				"binarySha256": "3a7e2dc003dc2cd1472827e4c7c4f056ae1ae0ae7c5bbc580c99b49827351ba4",
+				"binarySize": 82668032
+			},
+			"license": {
+				"asset": "win32-x64.LICENSE",
+				"sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+				"size": 35147
+			}
+		}
+	}
+}

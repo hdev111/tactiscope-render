@@ -1,0 +1,16 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/compositor",
+    "crates/effects",
+    "crates/gpu",
+    "crates/masks",
+    "crates/render",
+    "crates/render-cli",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/hdev111/tactiscope-render"

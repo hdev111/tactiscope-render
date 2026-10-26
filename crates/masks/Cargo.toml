@@ -1,0 +1,17 @@
+[package]
+name = "tactiscope-masks"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "GPU mask helpers used by the TactiScope renderer"
+
+[lib]
+name = "masks"
+path = "src/masks.rs"
+crate-type = ["rlib"]
+
+[dependencies]
+bytemuck = { version = "1.25.0", features = ["derive"] }
+gpu = { package = "tactiscope-gpu", path = "../gpu" }
+wgpu = "29.0.1"

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "project": {
+    "width": 640,
+    "height": 360,
+    "fps": { "numerator": 30, "denominator": 1 },
+    "background": {
+      "type": "gradient",
+      "css": "linear-gradient(135deg, #0f172a, #1d4ed8)"
+    }
+  },
+  "durationTicks": 120000,
+  "media": [],
+  "tracks": [
+    {
+      "order": 1,
+      "elements": [
+        {
+          "type": "text",
+          "id": "title",
+          "startTicks": 0,
+          "durationTicks": 120000,
+          "transform": {
+            "positionX": 0,
+            "positionY": 0,
+            "scaleX": 1,
+            "scaleY": 1,
+            "rotate": 0
+          },
+          "opacity": 1,
+          "blendMode": "normal",
+          "params": {
+            "content": "Hello renderer",
+            "fontSize": 16,
+            "fontFamily": "Arial",
+            "fontWeight": "bold",
+            "fontStyle": "normal",
+            "textAlign": "center",
+            "textDecoration": "none",
+            "letterSpacing": 0,
+            "lineHeight": 1.2,
+            "color": "#ffffff"
+          }
+        }
+      ]
+    }
+  ],
+  "audio": { "elements": [] },
+  "quality": "high"
+}

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "project": {
+    "width": 320,
+    "height": 180,
+    "fps": { "numerator": 30, "denominator": 1 },
+    "background": { "type": "color", "color": "#112233" }
+  },
+  "durationTicks": 120000,
+  "media": [],
+  "tracks": [],
+  "audio": { "elements": [] },
+  "quality": "high"
+}
