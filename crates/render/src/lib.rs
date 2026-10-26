@@ -3325,9 +3325,10 @@ mod tests {
     }
     #[test]
     fn committed_schema_matches_the_plan_types() {
-        let committed = include_str!("../../../schema/render-plan.schema.json");
-        let generated = serde_json::to_string_pretty(&plan_schema()).unwrap();
-        assert_eq!(committed.trim(), generated.trim());
+        let committed: Value =
+            serde_json::from_str(include_str!("../../../schema/render-plan.schema.json"))
+                .expect("committed schema is valid JSON");
+        assert_eq!(committed, plan_schema());
     }
 
     #[test]
