@@ -153,7 +153,7 @@ Same as video without `trimStartTicks` or `retime`; `mediaId` points at an image
   "blendMode": "normal",
   "params": {
     "content": "Hello",
-    "fontSize": 72,
+    "fontSize": 15,
     "fontFamily": "Arial",
     "fontWeight": "normal",
     "fontStyle": "normal",
@@ -165,6 +165,9 @@ Same as video without `trimStartTicks` or `retime`; `mediaId` points at an image
   }
 }
 ```
+
+`fontSize` is relative: rendered pixels are approximately
+`fontSize * canvasHeight / 90`. The default design size is `15`.
 
 Optional text background fields: `backgroundEnabled`, `backgroundColor`,
 `backgroundCornerRadius`, `backgroundPaddingX/Y`, `backgroundOffsetX/Y`.

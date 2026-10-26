@@ -1,3 +1,5 @@
+#![allow(clippy::too_many_arguments)]
+
 mod animation;
 mod audio;
 mod color;
@@ -1129,10 +1131,10 @@ impl NativeRenderer {
         if !sequential {
             return self.decode_video_frame(&element.media_id, source_ticks);
         }
-        if let Some((cached_ticks, bytes)) = self.sequential_frame_cache.get(&element.id) {
-            if *cached_ticks == time_ticks {
-                return Ok(bytes.clone());
-            }
+        if let Some((cached_ticks, bytes)) = self.sequential_frame_cache.get(&element.id)
+            && *cached_ticks == time_ticks
+        {
+            return Ok(bytes.clone());
         }
         let bytes =
             self.decode_video_frame_sequential(&element.id, media, element.trim_start_ticks, rate)?;
@@ -1651,8 +1653,7 @@ fn build_blur_passes(sigma_x: f32, sigma_y: f32) -> Vec<EffectPassDescriptor> {
     }
     let iterations = ((max_sigma * max_sigma) / (10.0 * 4.0 * 10.0 * 4.0))
         .ceil()
-        .max(1.0)
-        .min(8.0) as usize;
+        .clamp(1.0, 8.0) as usize;
     let per_sigma_x = sigma_x / (iterations as f32).sqrt();
     let per_sigma_y = sigma_y / (iterations as f32).sqrt();
     let step_x = (per_sigma_x / 10.0).max(1.0);
@@ -2722,13 +2723,10 @@ fn build_mask_path(
                         y1,
                         x2,
                         y2,
-                    ) {
-                        if !intersections.iter().any(|existing: &(f32, f32)| {
-                            (existing.0 - point.0).abs() < 1e-3
-                                && (existing.1 - point.1).abs() < 1e-3
-                        }) {
-                            intersections.push(point);
-                        }
+                    ) && !intersections.iter().any(|existing: &(f32, f32)| {
+                        (existing.0 - point.0).abs() < 1e-3 && (existing.1 - point.1).abs() < 1e-3
+                    }) {
+                        intersections.push(point);
                     }
                 }
                 if intersections.len() != 2 {

@@ -82,25 +82,25 @@ pub fn volume_expression(
             .get("segmentToNext")
             .and_then(Value::as_str)
             .unwrap_or("linear");
-        if segment == "step" {
-            if let Some(time) = key.get("time").and_then(Value::as_i64) {
-                knots.insert((time - 1).clamp(0, duration_ticks.max(0)));
-            }
+        if segment == "step"
+            && let Some(time) = key.get("time").and_then(Value::as_i64)
+        {
+            knots.insert((time - 1).clamp(0, duration_ticks.max(0)));
         }
-        if segment == "bezier" {
-            if let (Some(start), Some(end)) = (
+        if segment == "bezier"
+            && let (Some(start), Some(end)) = (
                 key.get("time").and_then(Value::as_i64),
                 keys.iter()
                     .filter_map(|other| other.get("time").and_then(Value::as_i64))
                     .filter(|time| *time > key.get("time").and_then(Value::as_i64).unwrap_or(0))
                     .min(),
-            ) {
-                let span = end - start;
-                if span > 0 {
-                    let steps = 24;
-                    for step in 1..steps {
-                        knots.insert(start + span * step / steps);
-                    }
+            )
+        {
+            let span = end - start;
+            if span > 0 {
+                let steps = 24;
+                for step in 1..steps {
+                    knots.insert(start + span * step / steps);
                 }
             }
         }

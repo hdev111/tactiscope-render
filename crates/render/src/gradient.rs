@@ -67,10 +67,12 @@ pub fn rasterize_background(css: &str, width: u32, height: u32) -> Result<Vec<u8
     let path = builder.finish().context("build background path")?;
     // CSS paints the last layer first (first layer is on top).
     for layer in layers.iter().rev() {
-        let mut paint = Paint::default();
         // The path covers exact canvas pixels; antialiasing would leave a
         // half-transparent seam around the canvas border.
-        paint.anti_alias = false;
+        let mut paint = Paint {
+            anti_alias: false,
+            ..Paint::default()
+        };
         match layer {
             Layer::Color(color) => paint.set_color(skia_color(*color)),
             Layer::Linear {
@@ -305,7 +307,7 @@ fn parse_angle(argument: &str) -> Result<f32> {
         return Ok(angle_from_direction(&lower));
     }
     if let Some(value) = lower.strip_suffix("deg") {
-        return Ok(value.trim().parse::<f32>().context("invalid angle")?);
+        return value.trim().parse::<f32>().context("invalid angle");
     }
     if let Some(value) = lower.strip_suffix("rad") {
         return Ok(
@@ -584,8 +586,8 @@ fn normalize_stops(raw: Vec<([f32; 4], Option<f32>)>) -> Vec<Stop> {
     let first_known = known[0];
     if first_known > 0 {
         let first_offset = stops[first_known].offset;
-        for index in 0..first_known {
-            stops[index].offset = first_offset * index as f32 / first_known as f32;
+        for (index, stop) in stops.iter_mut().take(first_known).enumerate() {
+            stop.offset = first_offset * index as f32 / first_known as f32;
         }
     }
     for pair in known.windows(2) {
@@ -744,7 +746,7 @@ mod tests {
     }
 
     #[test]
-    fn stopNormalization_fills_implicit_offsets() {
+    fn stop_normalization_fills_implicit_offsets() {
         let pixels =
             rasterize_background("linear-gradient(90deg, red 20%, blue, lime 80%)", 100, 10)
                 .unwrap();

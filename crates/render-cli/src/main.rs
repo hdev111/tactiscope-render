@@ -103,7 +103,10 @@ fn run() -> Result<()> {
 }
 
 fn log_progress(progress: ExportProgress) {
-    if progress.frame == 1 || progress.frame % 10 == 0 || progress.frame == progress.total_frames {
+    if progress.frame == 1
+        || progress.frame.is_multiple_of(10)
+        || progress.frame == progress.total_frames
+    {
         println!(
             "{}",
             serde_json::json!({
@@ -120,22 +123,22 @@ fn resolve_ffmpeg(args: &[String]) -> PathBuf {
     if let Some(value) = arg_value(args, "--ffmpeg") {
         return PathBuf::from(value);
     }
-    if let Ok(value) = std::env::var("FFMPEG_PATH") {
-        if !value.trim().is_empty() {
-            return PathBuf::from(value);
-        }
+    if let Ok(value) = std::env::var("FFMPEG_PATH")
+        && !value.trim().is_empty()
+    {
+        return PathBuf::from(value);
     }
-    if let Ok(exe) = std::env::current_exe() {
-        if let Some(dir) = exe.parent() {
-            let name = if cfg!(windows) {
-                "ffmpeg.exe"
-            } else {
-                "ffmpeg"
-            };
-            let candidate = dir.join(name);
-            if candidate.is_file() {
-                return candidate;
-            }
+    if let Ok(exe) = std::env::current_exe()
+        && let Some(dir) = exe.parent()
+    {
+        let name = if cfg!(windows) {
+            "ffmpeg.exe"
+        } else {
+            "ffmpeg"
+        };
+        let candidate = dir.join(name);
+        if candidate.is_file() {
+            return candidate;
         }
     }
     PathBuf::from(if cfg!(windows) {

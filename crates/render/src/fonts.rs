@@ -91,10 +91,10 @@ struct FontRoots {
 impl FontRoots {
     fn new(assets_root: &Path) -> Self {
         let mut roots = Vec::new();
-        if let Ok(value) = std::env::var("RENDER_FONTS_PATH") {
-            if !value.trim().is_empty() {
-                roots.push(PathBuf::from(value));
-            }
+        if let Ok(value) = std::env::var("RENDER_FONTS_PATH")
+            && !value.trim().is_empty()
+        {
+            roots.push(PathBuf::from(value));
         }
         // `assets_root` itself may be a fonts root (tests and direct sidecar use).
         roots.push(assets_root.to_path_buf());
@@ -102,11 +102,11 @@ impl FontRoots {
         if let Some(parent) = assets_root.parent() {
             roots.push(parent.join("fonts"));
         }
-        if let Ok(exe) = std::env::current_exe() {
-            if let Some(dir) = exe.parent() {
-                roots.push(dir.join("fonts"));
-                roots.push(dir.join("..").join("..").join("..").join("fonts"));
-            }
+        if let Ok(exe) = std::env::current_exe()
+            && let Some(dir) = exe.parent()
+        {
+            roots.push(dir.join("fonts"));
+            roots.push(dir.join("..").join("..").join("..").join("fonts"));
         }
         let mut unique = Vec::new();
         for root in roots {

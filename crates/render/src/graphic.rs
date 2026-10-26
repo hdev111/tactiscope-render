@@ -292,8 +292,8 @@ fn composite_masked_stroke(fill: &mut Pixmap, stroke: &[u8], coverage: &[u8], st
     for (pixel, body) in masked.chunks_exact_mut(4).zip(coverage.chunks_exact(4)) {
         let body_alpha = body[3] as f32 / 255.0;
         let factor = if inside { body_alpha } else { 1.0 - body_alpha };
-        for channel in 0..4 {
-            pixel[channel] = (pixel[channel] as f32 * factor).round() as u8;
+        for value in pixel.iter_mut() {
+            *value = (*value as f32 * factor).round() as u8;
         }
     }
     composite_source_over(fill, &masked);
